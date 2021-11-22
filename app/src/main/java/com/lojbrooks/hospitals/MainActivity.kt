@@ -8,6 +8,8 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.lojbrooks.hospitals.ui.HospitalListScreen
+import com.lojbrooks.hospitals.ui.HospitalsApp
 import com.lojbrooks.hospitals.ui.theme.HospitalsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,24 +19,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HospitalsTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    HospitalsApp()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    HospitalsTheme {
-        Greeting("Android")
     }
 }
