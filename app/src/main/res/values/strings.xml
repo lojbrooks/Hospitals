@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Hospitals</string>
+    <string name="hospital_list_error">Failed to fetch hospital data</string>
+    <string name="try_again_button">Try again</string>
 </resources>
