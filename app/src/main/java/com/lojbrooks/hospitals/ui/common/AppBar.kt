@@ -1,5 +1,6 @@
 package com.lojbrooks.hospitals.ui.common
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -11,7 +12,10 @@ import androidx.compose.ui.res.stringResource
 import com.lojbrooks.hospitals.R
 
 @Composable
-fun HospitalsAppBar(showUpNavigation: Boolean, onNavigateUp: () -> Unit) {
+fun HospitalsAppBar(
+    showUpNavigation: Boolean = false,
+    onNavigateUp: () -> Unit = {},
+    actions: @Composable RowScope.() -> Unit = {}) {
     TopAppBar(
         title = { Text(stringResource(id = R.string.app_name)) },
         navigationIcon = if (showUpNavigation) {
@@ -20,6 +24,7 @@ fun HospitalsAppBar(showUpNavigation: Boolean, onNavigateUp: () -> Unit) {
                     Icon(Icons.Default.ArrowBack, contentDescription = "Navigate up")
                 }
             }
-        } else null
+        } else null,
+        actions = actions
     )
 }
