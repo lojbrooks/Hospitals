@@ -14,12 +14,12 @@ class HospitalRepositoryImpl @Inject constructor(
     private val hospitalMapper: HospitalMapper,
     private val hospitalDao: HospitalDao
 ) : HospitalRepository {
+
     override suspend fun getAllHospitals(): Result<List<Hospital>> {
         val cachedHospitals = hospitalDao.getAllHospitals()
         return if (cachedHospitals.isNotEmpty()) {
             Result.success(cachedHospitals)
         } else fetchHospitalsFromRemoteDataSource()
-
     }
 
     private suspend fun fetchHospitalsFromRemoteDataSource(): Result<List<Hospital>> {
@@ -36,5 +36,9 @@ class HospitalRepositoryImpl @Inject constructor(
         } catch (ioException: IOException) {
             Result.failure(DataFetchException())
         }
+    }
+
+    override fun getHospital(orgId: Int): Hospital {
+        return hospitalDao.getHospital(orgId)
     }
 }

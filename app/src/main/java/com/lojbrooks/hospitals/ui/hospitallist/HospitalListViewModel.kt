@@ -1,4 +1,4 @@
-package com.lojbrooks.hospitals.ui
+package com.lojbrooks.hospitals.ui.hospitallist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

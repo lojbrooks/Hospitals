@@ -4,4 +4,5 @@ import com.lojbrooks.hospitals.domain.model.Hospital
 
 interface HospitalRepository {
     suspend fun getAllHospitals(): Result<List<Hospital>>
+    fun getHospital(orgId: Int): Hospital
 }

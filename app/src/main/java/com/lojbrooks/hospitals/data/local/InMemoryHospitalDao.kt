@@ -8,6 +8,10 @@ import javax.inject.Singleton
 class InMemoryHospitalDao @Inject constructor() : HospitalDao {
     private val hospitals = mutableListOf<Hospital>()
 
+    override fun getHospital(orgId: Int): Hospital {
+        return hospitals.first {it.orgId == orgId}
+    }
+
     override fun getAllHospitals(): List<Hospital> {
         return hospitals
     }

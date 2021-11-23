@@ -1,5 +1,6 @@
-package com.lojbrooks.hospitals.ui
+package com.lojbrooks.hospitals.ui.hospitallist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,7 +18,7 @@ import com.lojbrooks.hospitals.ui.common.HospitalsAppBar
 import com.lojbrooks.hospitals.ui.common.LoadingIndicator
 
 @Composable
-fun HospitalListScreen(viewModel: HospitalListViewModel) {
+fun HospitalListScreen(viewModel: HospitalListViewModel, navigateToHospitalDetail: (Int) -> Unit) {
     val state by viewModel.state.collectAsState()
 
     Column {
@@ -35,27 +36,29 @@ fun HospitalListScreen(viewModel: HospitalListViewModel) {
             HospitalListViewModel.State.Loading -> LoadingIndicator()
             HospitalListViewModel.State.Error -> HospitalListError(viewModel::onTryAgainClicked)
             is HospitalListViewModel.State.Data -> HospitalList(
-                hospitals = currentState.hospitals
+                hospitals = currentState.hospitals,
+                onHospitalClicked = navigateToHospitalDetail
             )
         }
     }
 }
 
 @Composable
-fun HospitalList(hospitals: List<Hospital>) {
+fun HospitalList(hospitals: List<Hospital>, onHospitalClicked: (Int) -> Unit) {
     LazyColumn(modifier = Modifier.padding(vertical = 8.dp)) {
         items(hospitals) { hospital ->
-            HospitalCard(hospital = hospital)
+            HospitalCard(hospital = hospital, onHospitalClicked = onHospitalClicked)
         }
     }
 }
 
 @Composable
-fun HospitalCard(hospital: Hospital) {
+fun HospitalCard(hospital: Hospital, onHospitalClicked: (Int) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
+            .clickable { onHospitalClicked(hospital.orgId) }
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(text = hospital.name, style = MaterialTheme.typography.h6)

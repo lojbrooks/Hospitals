@@ -5,4 +5,5 @@ import com.lojbrooks.hospitals.domain.model.Hospital
 interface HospitalDao {
     fun getAllHospitals(): List<Hospital>
     fun insert(hospitals: List<Hospital>)
+    fun getHospital(orgId: Int): Hospital
 }
